@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
@@ -25,8 +25,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/index' , [RecordsController::class, 'index']);
-Route::post('/index' , [RecordsController::class, 'store']);
-Route::get('/index/create', [RecordsController::class, 'create']);
+Route::post('/index' , [RecordsController::class, 'store'])->middleware('role:admin');
+Route::get('/index/create', [RecordsController::class, 'create'])->middleware('role:admin');
 Route::get('/index/{record}/edit' , [RecordsController::class, 'edit']);
 Route::put('/index/{record}', [RecordsController::class, 'update']);
-Route::delete('/index/{record}', [RecordsController::class, 'destroy']);
+Route::delete('/index/{record}', [RecordsController::class, 'destroy'])->name('index.delete')->middleware('role:admin');

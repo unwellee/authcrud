@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class RecordsController extends Controller
     public function store()
     {
 
-        User::create([
+        $user = User::create([
             'lastname' => request('lastname'),
 
             'firstname' => request('firstname'),
@@ -30,7 +31,10 @@ class RecordsController extends Controller
             'dateofbirth' => request('dateofbirth'),
 
             'gender' => request('gender'),
+
         ]);
+
+        $user->assignRole('employee');
 
         return redirect('/home');
     }
@@ -65,9 +69,17 @@ class RecordsController extends Controller
         return redirect('/home');
     }
 
-    public function destroy(User $record)
+    // public function destroy(User $record)
+    // {
+    //     $record->delete();
+
+    //     return redirect('/home');
+    // }
+    public function destroy($record)
+
     {
-        $record->delete();
+
+        User::find($record)->delete();
 
         return redirect('/home');
     }

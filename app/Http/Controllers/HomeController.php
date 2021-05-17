@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,10 +27,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $record = User::All();
+        // print_r(auth()->user());
+        // $Role2 = Role::findById(2);
+        // $permission2 = Permission::findById(2);
+        // $permission3 = Permission::findById(3);
+        // auth()->user()->assignRole($Role2);
+
+        // @role('admin')
+        
+        // @else
+        // $record = User::auth()->user();
+        // @endrole
+
+        if(auth()->user()->hasRole('admin')){
+            $record = User::All();
+        }else{
+            $id = Auth::id();
+            $record = User::where('id', $id)->get();
+        }
+
         return view('records.index', ['record' => $record]);
     }
-
+    
     
 
 }
