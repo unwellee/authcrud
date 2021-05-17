@@ -28,10 +28,10 @@ class HomeController extends Controller
     public function index()
     {
         // print_r(auth()->user());
-        // $Role2 = Role::findById(2);
+        // $Role1 = Role::findById(2);
         // $permission2 = Permission::findById(2);
         // $permission3 = Permission::findById(3);
-        // auth()->user()->assignRole($Role2);
+        // auth()->user()->assignRole($Role1);
 
         // @role('admin')
         
@@ -39,8 +39,10 @@ class HomeController extends Controller
         // $record = User::auth()->user();
         // @endrole
 
+
         if(auth()->user()->hasRole('admin')){
-            $record = User::All();
+            // $record = User::All();
+            $record = User::All()->except(Auth::id(1));
         }else{
             $id = Auth::id();
             $record = User::where('id', $id)->get();

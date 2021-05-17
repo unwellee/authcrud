@@ -23,10 +23,10 @@
                     <th>Address</th>
                     <th>Date of Birth</th>
                     <th>Gender</th>
-                    @role('admin')
-                        <th>Edit / Delete</th>
-                    @else
+                    
                         <th>Edit</th>
+                    @role('admin')
+                        <th>Delete</th>
                     @endrole
                     
                 </tr>
@@ -40,15 +40,21 @@
                         <td>{{ $rcrd-> address }}</td>
                         <td>{{ $rcrd-> dateofbirth }}</td>
                         <td>{{ $rcrd-> gender }}</td>
-                        <form action="/index/{{ $rcrd->id }}" method="POST">
+                        
+                        
                         <td><a href="/index/{{ $rcrd->id }}/edit" class="btn btn-info btn-sm">Edit</a> 
                         @role('admin')
+
+                        
+                        </td>
+                        <td><form action="/index/{{ $rcrd->id }}" method=POST>
                         @method('DELETE')
                         @csrf 
                         <button class="btn btn-danger btn-sm">Delete</button>
-                        @endrole
-                        </td>
+                        
+                        @endrole</td>
                         </form>
+                        
                     </tr>
                     @endforeach
         </table>

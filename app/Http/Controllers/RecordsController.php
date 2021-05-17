@@ -69,18 +69,18 @@ class RecordsController extends Controller
         return redirect('/home');
     }
 
-    // public function destroy(User $record)
-    // {
-    //     $record->delete();
-
-    //     return redirect('/home');
-    // }
-    public function destroy($record)
-
+    public function destroy(User $record)
     {
-
-        User::find($record)->delete();
+        $record->delete();
 
         return redirect('/home');
     }
+    // public function destroy($record)
+
+    // {
+
+    //     User::find($record)->delete();
+
+    //     return redirect('/home');
+    // }
 }
