@@ -5,7 +5,7 @@
     <div class="container p-5 mb-2 bg-light bg-gradient text-secondary">
         <div class="row">
             <div class="col">
-            <h1>Employees</h1>
+            <h1>Employee</h1>
             </div>
             <div class="col col-lg-2">
                     @role('admin')
@@ -41,9 +41,12 @@
                         <td>{{ $rcrd-> dateofbirth }}</td>
                         <td>{{ $rcrd-> gender }}</td>
                         
-                        
+                        @role('employee')
+                        <?php //$authid = auth()->id(); ?>
                         <td><a href="/index/{{ $rcrd->id }}/edit" class="btn btn-info btn-sm">Edit</a> 
+                        @endrole
                         @role('admin')
+                        <td><a href="/index/{{ $rcrd->id }}/edit" class="btn btn-info btn-sm">Edit</a> 
 
                         
                         </td>

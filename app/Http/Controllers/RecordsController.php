@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class RecordsController extends Controller
 { 
@@ -41,13 +43,23 @@ class RecordsController extends Controller
 
     public function edit(User $record)
     {
-        return view('records.edit', ['record' => $record]);
+        // if(isset(auth()->user()){
+        if(auth()->user()->hasRole('admin')){
+            return view('records.edit', ['record' => $record]);
+            }else if($record->id === Auth::id()){
+                return view('records.edit', ['record' => $record]);
+            }else{
+                abort(403, 'Unauthorized action.');
+            }
+        // }else {
+        //     abort(403, 'Unauthorized action.');
+        // }  
     }
 
     public function update(User $record)
     {
-        
-
+        // $id = Auth::id();
+        // if($record->id === $id){
         $record->update([
 
             'lastname' => request('lastname'),
@@ -63,8 +75,13 @@ class RecordsController extends Controller
             'dateofbirth' => request('dateofbirth'),
             
             'gender' => request('gender'),
+      
 
         ]);
+
+    // }else{
+            
+    // }
 
         return redirect('/home');
     }
@@ -75,12 +92,5 @@ class RecordsController extends Controller
 
         return redirect('/home');
     }
-    // public function destroy($record)
-
-    // {
-
-    //     User::find($record)->delete();
-
-    //     return redirect('/home');
-    // }
+    
 }

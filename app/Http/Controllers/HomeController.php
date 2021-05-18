@@ -41,8 +41,9 @@ class HomeController extends Controller
 
 
         if(auth()->user()->hasRole('admin')){
-            // $record = User::All();
-            $record = User::All()->except(Auth::id(1));
+            $record = User::All();
+            //optional if you dont want to include admin in the list.
+            // $record = User::All()->except(Auth::id());
         }else{
             $id = Auth::id();
             $record = User::where('id', $id)->get();
