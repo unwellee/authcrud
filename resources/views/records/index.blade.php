@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- employee list -->
 <div class="pt-5">
     <div class="container p-5 mb-2 bg-light bg-gradient text-secondary">
         <div class="row">
@@ -63,4 +64,51 @@
         </table>
     </div>
     </div>
+    
+    
+    <!-- task list -->
+    <div class="pt-5">
+    @role('admin')
+    <div class="container p-5 mb-2 bg-light bg-gradient text-secondary">
+        <div class="row">
+            <div class="col">
+            <h1>Task</h1>
+            </div>
+            <div class="col col-lg-2">
+                    
+                        <a href="/index/createtask" type="submit" class="btn btn-primary btn-sm">Add Task</a>
+                    
+            </div>
+        </div>
+        <table class="table table-borderless justify-content-center">
+            <thead class="table table-default font-size-20">
+                <tr>
+                    <th>Employee</th>
+                    <th>Task</th>
+                    <th>Deadline</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+                    @foreach($task as $task)
+                    <tr>
+                        <td>{{ $task-> employee }}</td>
+                        <td>{{ $task-> task }}</td>
+                        <td>{{ $task-> deadline }}</td>
+                        <td><a href="/index/{{ $task->id }}/edittask" class="btn btn-info btn-sm">Edit</a> </td>
+                        <td><form action="/index/{{ $task->id }}/task" method=POST>
+                        @method('DELETE')
+                        @csrf 
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                        
+                        </td>
+                        </form>
+                        
+                    </tr>
+                    @endforeach
+        </table>
+    </div>
+    @endrole
+    </div>
+    
 @endsection

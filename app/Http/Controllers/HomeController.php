@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -42,14 +43,16 @@ class HomeController extends Controller
 
         if(auth()->user()->hasRole('admin')){
             $record = User::All();
+            $task = Task::All();
             //optional if you dont want to include admin in the list.
             // $record = User::All()->except(Auth::id());
         }else{
             $id = Auth::id();
             $record = User::where('id', $id)->get();
+            $task = Task::All();
         }
 
-        return view('records.index', ['record' => $record]);
+        return view('records.index', ['record' => $record], ['task' => $task]);
     }
     
     

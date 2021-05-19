@@ -30,3 +30,9 @@ Route::get('/index/create', [RecordsController::class, 'create'])->middleware('r
 Route::get('/index/{record}/edit' , [RecordsController::class, 'edit']);
 Route::put('/index/{record}', [RecordsController::class, 'update']);
 Route::delete('/index/{record}', [RecordsController::class, 'destroy'])->name('index.delete')->middleware('role:admin');
+
+Route::post('/indextask' , [RecordsController::class, 'storetask'])->middleware('role:admin');
+Route::get('/index/createtask', [RecordsController::class, 'createtask'])->middleware('role:admin');
+Route::get('/index/{task}/edittask' , [RecordsController::class, 'edittask'])->middleware('role:admin');
+Route::put('/index/{task}/task', [RecordsController::class, 'updatetask'])->middleware('role:admin');
+Route::delete('/index/{task}/task', [RecordsController::class, 'destroytask'])->name('index.deletetask')->middleware('role:admin');

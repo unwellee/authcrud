@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,9 +80,7 @@ class RecordsController extends Controller
 
         ]);
 
-    // }else{
-            
-    // }
+    
 
         return redirect('/home');
     }
@@ -92,5 +91,58 @@ class RecordsController extends Controller
 
         return redirect('/home');
     }
+
+    public function createtask(User $record)
+    {
+        $record = User::All()->except(Auth::id());
+        return view('records.createtask', ['record' => $record]);
+    }
     
+    public function storetask()
+    {
+
+        Task::create([
+
+            'employee' => request('employee'),
+
+            'task' => request('task'),
+
+            'deadline' => request('deadline'),
+
+        ]);
+
+        return redirect('/home');
+    }
+
+    public function edittask(Task $task)
+    {
+        $record = User::All()->except(Auth::id());
+        return view('records.edittask',['record' => $record], ['task' => $task]);
+    }
+
+    public function updatetask(Task $task)
+    {
+    
+        $task->update([
+
+            'employee' => request('employee'),
+
+            'task' => request('task'),
+
+            'deadline' => request('deadline'),
+      
+        ]);
+
+    
+
+        return redirect('/home');
+    }
+
+    public function destroytask(Task $task)
+    {
+        $task->delete();
+
+        return redirect('/home');
+    }
+
 }
