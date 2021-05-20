@@ -1903,6 +1903,8 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("deadline")[0].setAttribute('min', today);
 
 /***/ }),
 

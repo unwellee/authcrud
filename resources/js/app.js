@@ -29,4 +29,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    
 });
+
+
+var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("deadline")[0].setAttribute('min', today);
+
+
+
+

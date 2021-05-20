@@ -103,7 +103,7 @@ class RecordsController extends Controller
 
         Task::create([
 
-            'employee' => request('employee'),
+            'employee_id' => request('employee'),
 
             'task' => request('task'),
 
@@ -125,7 +125,7 @@ class RecordsController extends Controller
     
         $task->update([
 
-            'employee' => request('employee'),
+            'employee_id' => request('employee'),
 
             'task' => request('task'),
 

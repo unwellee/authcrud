@@ -13,16 +13,22 @@
                             <div class="form-group">
                                 <label for="employee">Select Employee:</label>
                                 <select class="form-control" id="employee" name="employee">
-                                <option selected="selected">{{ $task->employee }}</option>
+                                <!-- <option value="{{ $task->employee_id }}" selected="selected" disabled>{{ $task->userTask->lastname }} {{ $task->userTask->firstname }}</option> -->
                                 @foreach($record as $rcrd)
-                                    <option name="employee" value ="{{ $rcrd->lastname}} {{ $rcrd->firstname }}">{{ $rcrd->lastname}} {{ $rcrd->firstname }}</option>
+                                    @if($task->userTask->id == $rcrd->id){
+                                        <option value="{{ $task->employee_id }}" selected="selected">{{ $task->userTask->lastname }} {{ $task->userTask->firstname }}</option>
+                                    }
+                                    @else{
+                                        <option name="employee" value ="{{ $rcrd->id }}">{{ $rcrd->lastname}} {{ $rcrd->firstname }}</option>
+                                    }
+                                    @endif
                                 @endforeach                   
                                 </select>
                             </div>
                         </div>
                         <div class="col">
                         <label>Deadline</label>
-                        <input type="date" class="form-control" name="deadline" placeholder=""  value="{{ $task->deadline}}" required>
+                        <input type="date" class="form-control" name="deadline" id="txtDate" placeholder=""  value="{{ $task->deadline}}" required>
                         </div>
                     </div>
                     <div class="pt-3">

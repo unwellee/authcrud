@@ -92,9 +92,9 @@
             </thead>
                     @foreach($task as $task)
                     <tr>
-                        <td>{{ $task-> employee }}</td>
-                        <td>{{ $task-> task }}</td>
-                        <td>{{ $task-> deadline }}</td>
+                        <td>{{ $task->userTask->lastname }} {{ $task->userTask->firstname }}</td>
+                        <td>{{ $task->task }}</td>
+                        <td>{{ $task->deadline }}</td>
                         <td><a href="/index/{{ $task->id }}/edittask" class="btn btn-info btn-sm">Edit</a> </td>
                         <td><form action="/index/{{ $task->id }}/task" method=POST>
                         @method('DELETE')
@@ -105,6 +105,7 @@
                         </form>
                         
                     </tr>
+                        
                     @endforeach
         </table>
     </div>

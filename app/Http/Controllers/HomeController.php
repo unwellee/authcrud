@@ -43,7 +43,9 @@ class HomeController extends Controller
 
         if(auth()->user()->hasRole('admin')){
             $record = User::All();
-            $task = Task::All();
+            $task = Task::with('userTask')->get();
+            // $id = Task::All();
+            // $employee = User::where('id', $id)->get();
             //optional if you dont want to include admin in the list.
             // $record = User::All()->except(Auth::id());
         }else{
